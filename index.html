@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>POS Ventas - MVP</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header>
+    <h1>POS Ventas — MVP</h1>
+    <nav id="nav" class="hidden">
+      <button id="nav-ventas">Ventas</button>
+      <button id="nav-inventario">Inventario</button>
+      <button id="nav-reportes">Reportes</button>
+      <button id="btn-logout">Salir</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Login -->
+    <section id="view-login">
+      <h2>Ingresar</h2>
+      <label for="sel-pdv">Punto de venta</label>
+      <select id="sel-pdv"></select>
+
+      <label for="sel-usuario">Usuario</label>
+      <select id="sel-usuario"></select>
+
+      <label for="pin">PIN (3 dígitos)</label>
+      <input id="pin" type="password" inputmode="numeric" maxlength="3" placeholder="***" />
+
+      <button id="btn-login">Entrar</button>
+      <p class="hint">Demo: PDV "Asturias", usuario "Caja 1", PIN 123</p>
+    </section>
+
+    <!-- Ventas -->
+    <section id="view-ventas" class="hidden">
+      <h2>Registrar venta</h2>
+      <div class="flex-row">
+        <div class="card">
+          <h3>Productos</h3>
+          <div id="productos-list"></div>
+        </div>
+        <div class="card">
+          <h3>Combos</h3>
+          <div id="combos-list"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Pago</h3>
+        <label for="metodo-pago">Método</label>
+        <select id="metodo-pago">
+          <option value="efectivo">Efectivo</option>
+          <option value="transferencia">Transferencia</option>
+        </select>
+        <div class="totales">
+          <span>Subtotal: $<span id="subtotal">0</span></span>
+          <span>Descuento: $<input id="descuento" type="number" min="0" value="0"/></span>
+          <span>Total: $<span id="total">0</span></span>
+        </div>
+        <button id="btn-registrar">Registrar venta</button>
+      </div>
+    </section>
+
+    <!-- Inventario -->
+    <section id="view-inventario" class="hidden">
+      <h2>Inventario</h2>
+      <div id="inventario-table"></div>
+      <div class="card">
+        <h3>Ajuste rápido</h3>
+        <label>Producto</label>
+        <select id="aj-prod"></select>
+        <label>Cantidad (+/-)</label>
+        <input id="aj-cant" type="number" value="0"/>
+        <button id="btn-ajustar">Aplicar</button>
+      </div>
+    </section>
+
+    <!-- Reportes -->
+    <section id="view-reportes" class="hidden">
+      <h2>Reportes</h2>
+      <div class="filters">
+        <label>Desde</label>
+        <input type="date" id="f-desde"/>
+        <label>Hasta</label>
+        <input type="date" id="f-hasta"/>
+        <button id="btn-filtrar">Filtrar</button>
+        <button id="btn-export-csv">Exportar CSV</button>
+      </div>
+      <div id="reportes-table"></div>
+      <div class="card">
+        <h3>Resumen</h3>
+        <p>Ventas: <span id="res-cant">0</span></p>
+        <p>Total vendido: $<span id="res-total">0</span></p>
+        <p>Efectivo: $<span id="res-efectivo">0</span> | Transferencia: $<span id="res-transf">0</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Hecho con ❤️ — Funciona 100% local (LocalStorage). Se puede migrar a backend.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
