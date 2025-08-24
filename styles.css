@@ -1,25 +1,126 @@
-*{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;}
-body{margin:0;padding:0;background:#f6f7fb;color:#111;}
-header{background:#fff;border-bottom:1px solid #e5e7eb;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
-h1{font-size:20px;margin:0;}
-h2{margin:16px 0 8px 0;}
-main{padding:16px;max-width:1100px;margin:0 auto;}
-.hidden{display:none;}
-.card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px;margin:8px 0;}
-label{display:block;margin:8px 0 4px 0;}
-input,select,button{padding:10px;border:1px solid #d1d5db;border-radius:6px;font-size:14px;}
-button{cursor:pointer}
-button:hover{background:#f1f5f9}
-.hint{color:#6b7280;font-size:12px}
-.flex-row{display:flex;gap:12px;flex-wrap:wrap}
-#productos-list,#combos-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
-.item{border:1px solid #e5e7eb;border-radius:8px;padding:10px;background:#fafafa;display:flex;flex-direction:column;gap:8px}
-.item .row{display:flex;gap:6px;align-items:center;justify-content:space-between}
-.qty-input{width:80px}
-.totales{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0;align-items:center}
-nav button{margin-left:8px}
-.filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-table{width:100%;border-collapse:collapse;margin-top:8px;background:#fff}
-th,td{border:1px solid #e5e7eb;padding:8px;text-align:left;font-size:14px}
-tfoot td{font-weight:bold}
-footer{padding:12px 16px;color:#6b7280;text-align:center}
+:root {
+  --tosfri-red: #C42026; /* cambia al HEX exacto de tu XD si es diferente */
+  --white: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--tosfri-red);
+  color: var(--white);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.card {
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 20px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.h1 {
+  font-size: 28px;
+  font-weight: 900;
+  margin: 4px 0;
+}
+
+.h2 {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 2px 0;
+}
+
+.grid {
+  display: grid;
+  gap: 12px;
+}
+
+.grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 760px) {
+  .grid.cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input,
+select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, .25);
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+
+.btn {
+  width: 100%;
+  min-height: 70px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 255, 255, .25);
+  background: rgba(0, 0, 0, .18);
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn:hover {
+  filter: brightness(1.1);
+}
+
+.ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .4);
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, .25);
+  border: 1px solid rgba(255, 255, 255, .25);
+  font-weight: 800;
+}
+
+.sep {
+  height: 1px;
+  background: rgba(255, 255, 255, .25);
+  margin: 10px 0;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal > div {
+  background: var(--tosfri-red);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 18px;
+  padding: 16px;
+  max-width: 520px;
+  width: 100%;
+}
