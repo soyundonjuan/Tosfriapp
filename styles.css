@@ -1,126 +1,120 @@
-:root {
-  --tosfri-red: #C42026; /* cambia al HEX exacto de tu XD si es diferente */
-  --white: #fff;
+/* ===== Tokens ===== */
+:root{
+  --bg:#BD171D;      /* Fondo del frame */
+  --text:#FFFFFF;    /* Texto principal */
+  --white:#FFFFFF;
+  --ink:#111;
 }
 
-* {
-  box-sizing: border-box;
+/* ===== Reset / Base ===== */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font-family: "Helvetica Neue", Helvetica, Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color:var(--text);
 }
 
-html, body {
-  margin: 0;
-  height: 100%;
-  background: var(--tosfri-red);
-  color: var(--white);
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+/* ===== Login Layout ===== */
+.login-bg{background:var(--bg)}
+.login-wrap{
+  max-width:420px;
+  margin:0 auto;
+  padding:24px 20px 32px;
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
 }
 
-.wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 16px;
+/* Logo según XD (ajusta si tu frame usa otra altura) */
+.logo-login{
+  height:96px;
+  width:auto;
+  display:block;
+  margin:28px auto 8px;
 }
 
-.card {
-  background: rgba(255, 255, 255, .08);
-  border: 1px solid rgba(255, 255, 255, .15);
-  border-radius: 20px;
-  padding: 16px;
-  margin: 12px 0;
+/* Título (left, 40/49, bold) */
+.login-title{
+  margin:16px 0 14px;
+  text-align:left;
+  font-weight:700;           /* bold */
+  font-size:40px;
+  line-height:49px;
+  letter-spacing:0;
+  color:var(--text);
 }
 
-.h1 {
-  font-size: 28px;
-  font-weight: 900;
-  margin: 4px 0;
+/* Labels */
+.login-label{
+  margin:8px 4px 6px;
+  font-size:14px;
+  opacity:.95;
 }
 
-.h2 {
-  font-size: 22px;
-  font-weight: 800;
-  margin: 2px 0;
+/* Contenedor de input + botón/chevron */
+.input-row{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.grid {
-  display: grid;
-  gap: 12px;
+/* Píldoras blancas (selector y pin) */
+.input-pill{
+  appearance:none;
+  -webkit-appearance:none;
+  width:100%;
+  padding:14px 20px;
+  background:var(--white);
+  color:#333;
+  border:none;
+  border-radius:25px;    /* radios 25px */
+  outline:none;
+  font-size:16px;
 }
 
-.grid.cols-2 {
-  grid-template-columns: repeat(2, 1fr);
+/* Chevron del select */
+.chev{
+  position:absolute;
+  right:18px;
+  pointer-events:none;
+  color:#666;
+  font-size:18px;
 }
 
-@media (max-width: 760px) {
-  .grid.cols-2 {
-    grid-template-columns: 1fr;
-  }
+/* Botón flecha: fondo blanco, borde ninguno */
+.btn-go{
+  flex:0 0 54px;
+  height:54px;
+  border:none;
+  border-radius:27px;
+  background:#FFFFFF;     /* según especificación */
+  display:grid;
+  place-items:center;
+  padding:0;
+  cursor:pointer;
+  transition:transform .12s ease, filter .12s ease;
+}
+.btn-go:disabled{opacity:.55; cursor:not-allowed}
+.btn-go:not(:disabled):hover{filter:brightness(1.03); transform:translateY(-1px)}
+
+/* Footer */
+.login-foot{
+  text-align:center;
+  opacity:.9;
+  font-size:12px;
+  margin-top:auto;
+  padding-top:28px;
 }
 
-.input,
-select {
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  border: 2px solid rgba(255, 255, 255, .25);
-  background: rgba(255, 255, 255, .08);
-  color: #fff;
-  font-size: 16px;
-  outline: none;
+/* Toast minimal */
+.toast{
+  position:fixed; left:50%; bottom:20px; transform:translateX(-50%);
+  background:#000000cc; color:#fff; padding:10px 14px; border-radius:10px;
+  font-size:14px; display:none; z-index:9999; max-width:90%;
+  text-align:center;
 }
 
-.btn {
-  width: 100%;
-  min-height: 70px;
-  padding: 18px;
-  border-radius: 18px;
-  border: 2px solid rgba(255, 255, 255, .25);
-  background: rgba(0, 0, 0, .18);
-  color: #fff;
-  font-weight: 900;
-  letter-spacing: .6px;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.btn:hover {
-  filter: brightness(1.1);
-}
-
-.ghost {
-  background: transparent;
-  border-color: rgba(255, 255, 255, .4);
-}
-
-.badge {
-  display: inline-block;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, .25);
-  border: 1px solid rgba(255, 255, 255, .25);
-  font-weight: 800;
-}
-
-.sep {
-  height: 1px;
-  background: rgba(255, 255, 255, .25);
-  margin: 10px 0;
-}
-
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, .55);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-}
-
-.modal > div {
-  background: var(--tosfri-red);
-  border: 1px solid rgba(255, 255, 255, .2);
-  border-radius: 18px;
-  padding: 16px;
-  max-width: 520px;
-  width: 100%;
-}
+/* Accesibilidad focus */
+.input-pill:focus, .btn-go:focus{ outline:2px solid #ffffffaa; outline-offset:2px; }
