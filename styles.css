@@ -28,7 +28,7 @@ body{
 
 /* Logo según XD (ajusta si tu frame usa otra altura) */
 .logo-login{
-  height:96px;
+  height:150px;
   width:auto;
   display:block;
   margin:28px auto 8px;
