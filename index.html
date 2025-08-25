@@ -36,6 +36,53 @@
       </button>
     </div>
 
+
+    <!-- ===== Frame 2: Home de registro de venta ===== -->
+<section id="venta-home" class="venta-wrap" style="display:none;">
+  <!-- Topbar con dos botones redondos y logo al centro -->
+  <div class="topbar">
+    <button id="btnSalir" class="icon-circle" aria-label="Salir" title="Salir">
+      <!-- icono salir -->
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path d="M10 6H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h4"
+              fill="none" stroke="#BD171D" stroke-width="2" stroke-linecap="round"/>
+        <path d="M13 16l4-4-4-4M7 12h10"
+              fill="none" stroke="#BD171D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <img src="assets/logo_tosfri.webp" alt="Los Propios Tosfri" class="logo-small"/>
+
+    <button id="btnReportar" class="icon-circle" aria-label="Reportar mermas" title="Reportar mermas">
+      <!-- icono alerta -->
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" fill="none" stroke="#BD171D" stroke-width="2"/>
+        <path d="M12 7v6M12 17h.01" fill="none" stroke="#BD171D" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Título -->
+  <h2 class="venta-title">Registra<br/>la venta</h2>
+
+  <!-- Botones principales con contador -->
+  <div class="pile">
+    <button id="btnCombos" class="btn-pill btn-with-badge">
+      <span class="badge-circle" id="countCombos">1</span>
+      <span>Combos</span>
+    </button>
+
+    <button id="btnProductos" class="btn-pill btn-with-badge">
+      <span class="badge-circle" id="countProductos">0</span>
+      <span>Productos</span>
+    </button>
+
+    <button id="btnRegistrar" class="btn-outline">Registrar</button>
+  </div>
+
+  <p class="login-foot">Hecho con amor para “Los propios TosFri”</p>
+</section>
+
     <p class="login-foot">Hecho con amor para “Los propios TosFri”</p>
   </main>
 
