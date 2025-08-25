@@ -48,12 +48,12 @@ body{
   max-width:420px; margin:0 auto; padding:24px 20px 32px;
   min-height:100dvh; display:flex; flex-direction:column; align-items:stretch;
 }
-.logo-login{ height:96px; width:auto; display:block; margin:28px auto 8px; }
+.logo-login{ height:150px; width:auto; display:block; margin:28px auto 8px; }
 .login-title{
   margin:16px 0 14px; text-align:left;
   font-weight:700; font-size:40px; line-height:49px; letter-spacing:0; color:var(--text);
 }
-.login-label{ margin:8px 4px 6px; font-size:14px; opacity:.95; }
+.login-label{ margin:8px 4px 6px; font-size:14px; font-align: center; opacity:.95; }
 
 /* ===== Frame 2: Home de venta ===== */
 .venta-wrap{
