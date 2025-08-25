@@ -1,4 +1,4 @@
-ter/* ===== Tokens ===== */
+/* ===== Tokens ===== */
 :root{
   --bg:#BD171D;      /* Fondo */
   --text:#FFFFFF;    /* Texto */
@@ -48,7 +48,7 @@ body{
   max-width:420px; margin:0 auto; padding:24px 20px 32px;
   min-height:100dvh; display:flex; flex-direction:column; align-items:stretch;
 }
-.logo-login{ height:200px; width:auto; display:block; margin:28px auto 8px; }
+.logo-login{ height:150px; width:auto; display:block; margin:28px auto 8px; }
 .login-title{
   margin:16px 0 14px; text-align:center;
   font-weight:700; font-size:40px; line-height:49px; letter-spacing:0; color:var(--text);
@@ -73,7 +73,7 @@ body{
 .logo-small{ height:100px; width:auto; justify-self:center; }
 
 .venta-title{
-  margin:22px 0 16px; text-align:center;
+  margin:22px 0 16px; text-align:left;
   font-weight:700; font-size:40px; line-height:49px;
 }
 
