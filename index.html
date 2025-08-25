@@ -3,160 +3,47 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>TosFri POS (Single File)</title>
-  <style>
-    :root{ --tosfri-red:#C42026; --white:#fff; }
-    *{box-sizing:border-box}
-    html,body{margin:0;height:100%;background:var(--tosfri-red);color:var(--white);
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
-    .wrapper{max-width:1000px;margin:0 auto;padding:16px}
-    .card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
-      border-radius:20px;padding:16px;margin:12px 0}
-    .h1{font-size:28px;font-weight:900;margin:4px 0}
-    .h2{font-size:22px;font-weight:800;margin:2px 0}
-    .grid{display:grid;gap:12px}
-    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-    @media(max-width:760px){.grid.cols-2{grid-template-columns:1fr}}
-    .input, select{width:100%;padding:14px;border-radius:14px;border:2px solid rgba(255,255,255,.25);
-      background:rgba(255,255,255,.08);color:#fff;font-size:16px;outline:none}
-    .btn{width:100%;min-height:70px;padding:18px;border-radius:18px;border:2px solid rgba(255,255,255,.25);
-      background:rgba(0,0,0,.18);color:#fff;font-weight:900;letter-spacing:.6px;text-transform:uppercase;cursor:pointer}
-    .ghost{background:transparent;border-color:rgba(255,255,255,.4)}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.25);font-weight:800}
-    .sep{height:1px;background:rgba(255,255,255,.25);margin:10px 0}
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:16px}
-    .modal>div{background:var(--tosfri-red);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:16px;max-width:520px;width:100%}
-  </style>
+  <title>TosFri · Login</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
-<body>
-  <div class="wrapper">
-    <div class="card" id="v-login">
-      <div class="h1">Ingresar</div>
-      <div class="grid cols-2">
-        <div><label>Punto / Usuario</label><select id="userSelect" class="input"></select></div>
-        <div><label>PIN</label><input id="pinInput" class="input" type="password" maxlength="4" placeholder="●●●●"/></div>
-      </div>
-      <div style="margin-top:12px"><button class="btn" id="btnLogin">Entrar</button></div>
+<body class="login-bg">
+  <main class="login-wrap">
+
+    <!-- Logo -->
+    <img src="assets/logo_tosfri.webp" alt="Los Propios Tosfri" class="logo-login"/>
+
+    <!-- Título -->
+    <h1 class="login-title">Ingresar</h1>
+
+    <!-- Selector Punto de Venta -->
+    <label class="login-label" for="pvSelect">Punto de venta</label>
+    <div class="input-row">
+      <select id="pvSelect" class="input-pill">
+        <!-- se rellena también desde JS por si luego crecen -->
+        <option value="Asturias">Asturias</option>
+      </select>
+      <span class="chev">▾</span>
     </div>
 
-    <div class="card" id="v-home" style="display:none">
-      <div class="h1">Acciones rápidas</div>
-      <div class="grid cols-2">
-        <button class="btn" id="goVentas">Registrar ventas</button>
-        <button class="btn" id="goMermas">Registrar mermas</button>
-      </div>
+    <!-- PIN -->
+    <label class="login-label" for="pinInput">PIN (4 dígitos)</label>
+    <div class="input-row">
+      <input id="pinInput" class="input-pill" type="password"
+             inputmode="numeric" maxlength="4" placeholder="••••" aria-label="PIN"/>
+      <button id="btnGo" class="btn-go" aria-label="Acceder" title="Acceder">
+        <!-- Flecha circular (SVG) -->
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="#BD171D"></circle>
+          <path d="M10 7l5 5-5 5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
 
-    <div class="card" id="v-ventas" style="display:none">
-      <div class="h2">Ventas <span id="cartTotal" class="badge">$0</span></div>
-      <div class="grid cols-2" style="margin-bottom:10px">
-        <button class="btn ghost" id="tabCombos">Combos</button>
-        <button class="btn ghost" id="tabProductos">Productos</button>
-      </div>
-      <div id="ventasContent"></div>
-      <div class="sep"></div>
-      <div class="grid cols-2">
-        <button class="btn" id="btnCobrar">Cobrar</button>
-        <button class="btn" id="btnBackVentas">Volver</button>
-      </div>
-    </div>
+    <p class="login-foot">Hecho con amor para “Los propios TosFri”</p>
+  </main>
 
-    <div class="card" id="v-mermas" style="display:none">
-      <div class="h2">Registrar merma</div>
-      <div class="grid cols-2">
-        <div><label>Producto</label><select class="input" id="mermaProducto"></select></div>
-        <div><label>Cantidad</label><input class="input" id="mermaQty" type="number" min="1" value="1"/></div>
-      </div>
-      <div class="grid cols-2" style="margin-top:10px">
-        <div><label>Motivo</label><select class="input" id="mermaMotivo"></select></div>
-        <div><label>Nota</label><input class="input" id="mermaNota" placeholder="Opcional"/></div>
-      </div>
-      <div class="grid cols-2" style="margin-top:12px">
-        <button class="btn" id="btnGuardarMerma">Guardar</button>
-        <button class="btn" id="btnBackMermas">Volver</button>
-      </div>
-    </div>
-  </div>
+  <div id="toast" class="toast" role="alert"></div>
 
-  <div class="modal" id="modalPago">
-    <div>
-      <div class="h2">Selecciona método de pago</div>
-      <div class="grid cols-2" style="margin-top:8px">
-        <button class="btn" data-pay="efectivo">Efectivo</button>
-        <button class="btn" data-pay="transferencia">Transferencia</button>
-      </div>
-      <div class="sep"></div>
-      <button class="btn ghost" id="closePago">Cancelar</button>
-    </div>
-  </div>
-
-  <div class="modal" id="modalToast">
-    <div>
-      <div class="h2">Mensaje</div>
-      <p id="toastMsg"></p>
-      <button class="btn ghost" id="closeToast">Cerrar</button>
-    </div>
-  </div>
-
-  <script>
-    // ---- DATA (inline) ----
-    const USERS = [{id:"LOC-001-CAJA1",name:"Asturias – Caja 1",pin:"123",role:"seller",location_id:"LOC-001",active:true}];
-    const PRODUCTS = [
-      {id:"PRD-EMP-POL",name:"Empanada de pollo",category:"empanada",price:2000,active:true},
-      {id:"PRD-EMP-CAR",name:"Empanada de carne",category:"empanada",price:2000,active:true},
-      {id:"PRD-EMP-QUE",name:"Empanada de queso",category:"empanada",price:2000,active:true},
-      {id:"PRD-ARE-TRI",name:"Arepa trifásica",category:"arepa",price:3000,active:true},
-      {id:"PRD-ARE-RAN",name:"Arepa ranchera",category:"arepa",price:3000,active:true},
-      {id:"PRD-KIB-UNI",name:"Kibbe",category:"pasaboca",price:3500,active:true},
-      {id:"PRD-JUG-COR",name:"Jugo natural de corozó",category:"jugo",price:2500,active:true},
-      {id:"PRD-JUG-MAR",name:"Jugo natural de maracuyá",category:"jugo",price:2500,active:true},
-      {id:"PRD-JUG-AVE",name:"Jugo natural de avena",category:"jugo",price:2500,active:true}
-    ];
-    const COMBOS = [
-      {id:"CMB-001",name:"Combo 1",price:6000,active:true},
-      {id:"CMB-002",name:"Combo 2",price:7000,active:true},
-      {id:"CMB-003",name:"Combo familiar",price:22000,active:true}
-    ];
-    const SLOTS = [
-      {id:"CBS-001",combo_id:"CMB-001",slot_name:"Empanadas",allowed_category:"empanada",qty_allowed:2},
-      {id:"CBS-002",combo_id:"CMB-001",slot_name:"Jugos",allowed_category:"jugo",qty_allowed:1},
-      {id:"CBS-003",combo_id:"CMB-002",slot_name:"Arepas",allowed_category:"arepa",qty_allowed:1},
-      {id:"CBS-004",combo_id:"CMB-002",slot_name:"Empanadas",allowed_category:"empanada",qty_allowed:1},
-      {id:"CBS-005",combo_id:"CMB-002",slot_name:"Jugos",allowed_category:"jugo",qty_allowed:1},
-      {id:"CBS-006",combo_id:"CMB-003",slot_name:"Empanadas",allowed_category:"empanada",qty_allowed:4},
-      {id:"CBS-007",combo_id:"CMB-003",slot_name:"Arepas",allowed_category:"arepa",qty_allowed:3},
-      {id:"CBS-008",combo_id:"CMB-003",slot_name:"Jugos",allowed_category:"jugo",qty_allowed:3}
-    ];
-
-    const $=s=>document.querySelector(s);
-    const money=n=>new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(n||0);
-    const state={user:null,cart:[]};
-    function toast(m){$('#toastMsg').textContent=m;$('#modalToast').style.display='flex';}
-    $('#closeToast').onclick=()=>$('#modalToast').style.display='none';
-
-    // Login
-    USERS.forEach(u=>{const o=document.createElement('option');o.value=u.id;o.textContent=u.name;$('#userSelect').appendChild(o);});
-    $('#btnLogin').onclick=()=>{const u=USERS.find(x=>x.id===$('#userSelect').value);if(!u)return toast('Selecciona un usuario');if($('#pinInput').value.trim()!==u.pin)return toast('PIN incorrecto');state.user=u;$('#v-login').style.display='none';$('#v-home').style.display='block';};
-
-    // Home
-    $('#goVentas').onclick=()=>{$('#v-home').style.display='none';$('#v-ventas').style.display='block';renderCombos();};
-    $('#goMermas').onclick=()=>{$('#v-home').style.display='none';$('#v-mermas').style.display='block';renderMermas();};
-
-    // Ventas
-    function updateTotal(){const t=state.cart.reduce((s,i)=>s+i.unit_price*i.qty,0);$('#cartTotal').textContent=money(t);}
-    $('#tabCombos').onclick=renderCombos;$('#tabProductos').onclick=renderProductos;$('#btnBackVentas').onclick=()=>{$('#v-ventas').style.display='none';$('#v-home').style.display='block';};
-    $('#btnCobrar').onclick=()=>{if(state.cart.length===0)return toast('El carrito está vacío');$('#modalPago').style.display='flex';};
-    $('#closePago').onclick=()=>$('#modalPago').style.display='none';
-    document.querySelectorAll('#modalPago [data-pay]').forEach(b=>b.onclick=()=>{state.cart=[];updateTotal();$('#modalPago').style.display='none';toast('Venta registrada ('+b.dataset.pay+')');});
-
-    function renderCombos(){const cont=$('#ventasContent');cont.innerHTML='';const grid=document.createElement('div');grid.className='grid cols-2';COMBOS.forEach(c=>{const b=document.createElement('button');b.className='btn';b.textContent=c.name+' — '+money(c.price);b.onclick=()=>openCombo(c);grid.appendChild(b);});cont.appendChild(grid);}
-    function openCombo(combo){const cont=$('#ventasContent');cont.innerHTML='';const h=document.createElement('div');h.className='h2';h.textContent=combo.name+' ('+money(combo.price)+')';cont.appendChild(h);const picks={};const slots=SLOTS.filter(s=>s.combo_id===combo.id);slots.forEach(slot=>{const box=document.createElement('div');box.className='card';const t=document.createElement('div');t.className='h2';t.textContent=slot.slot_name+' (máx. '+slot.qty_allowed+')';box.appendChild(t);const grid=document.createElement('div');grid.className='grid cols-2';PRODUCTS.filter(p=>p.category===slot.allowed_category).forEach(p=>{const b=document.createElement('button');b.className='btn ghost';b.textContent=p.name+' — '+money(p.price);b.onclick=()=>{const arr=picks[slot.id]||[];if(arr.length>=slot.qty_allowed)return toast('Límite alcanzado');picks[slot.id]=[...arr,p.id];b.style.filter='brightness(1.1)';};grid.appendChild(b);});box.appendChild(grid);cont.appendChild(box);});const row=document.createElement('div');row.className='grid cols-2';row.style.marginTop='10px';const add=document.createElement('button');add.className='btn';add.textContent='Agregar al carrito';add.onclick=()=>{for(const s of slots){const arr=picks[s.id]||[];if(arr.length!==s.qty_allowed)return toast('Falta seleccionar en '+s.slot_name);}for(const s of slots){(picks[s.id]||[]).forEach(pid=>{const prod=PRODUCTS.find(pp=>pp.id===pid);state.cart.push({product_id:pid,name:prod.name,qty:1,unit_price:prod.price,is_from_combo:true,combo_id:combo.id});});}updateTotal();toast('Combo agregado');};const back=document.createElement('button');back.className='btn';back.textContent='Volver';back.onclick=renderCombos;row.appendChild(add);row.appendChild(back);cont.appendChild(row);}
-    function renderProductos(){const cont=$('#ventasContent');cont.innerHTML='';const grid=document.createElement('div');grid.className='grid cols-2';PRODUCTS.forEach(p=>{const b=document.createElement('button');b.className='btn';b.textContent=p.name+' — '+money(p.price);b.onclick=()=>{state.cart.push({product_id:p.id,name:p.name,qty:1,unit_price:p.price,is_from_combo:false});updateTotal();};grid.appendChild(b);});cont.appendChild(grid);}
-
-    // Mermas
-    function renderMermas(){const sel=$('#mermaProducto');sel.innerHTML='';PRODUCTS.forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=p.name;sel.appendChild(o);});const mot=$('#mermaMotivo');mot.innerHTML='';["Se partió","Quemado","Caducidad","Otro"].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;mot.appendChild(o);});}
-    $('#btnBackMermas').onclick=()=>{$('#v-mermas').style.display='none';$('#v-home').style.display='block';};
-    $('#btnGuardarMerma').onclick=()=>{const pid=$('#mermaProducto').value,qty=Number($('#mermaQty').value||0);if(!pid||qty<=0)return toast('Completa producto y cantidad');toast('Merma registrada');$('#mermaQty').value=1;$('#mermaNota').value='';};
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
