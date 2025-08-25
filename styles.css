@@ -118,3 +118,83 @@ body{
 
 /* Accesibilidad focus */
 .input-pill:focus, .btn-go:focus{ outline:2px solid #ffffffaa; outline-offset:2px; }
+
+
+/* ====== Frame 2: Home de venta ====== */
+.venta-wrap{
+  max-width:420px;
+  margin:0 auto;
+  padding:24px 20px 40px;
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+  color:#fff;
+}
+
+/* Topbar con botones circulares y logo centrado */
+.topbar{
+  display:grid;
+  grid-template-columns:48px 1fr 48px;
+  align-items:center;
+  gap:12px;
+  margin-top:8px;
+}
+.icon-circle{
+  width:48px;height:48px;border-radius:50%;
+  background:#FFFFFF; border:none; display:grid; place-items:center;
+  cursor:pointer; transition:transform .12s ease, filter .12s ease;
+}
+.icon-circle:hover{ transform:translateY(-1px); filter:brightness(1.02); }
+.logo-small{ height:56px; width:auto; justify-self:center; }
+
+/* Título grande (seguimos estilo del login) */
+.venta-title{
+  margin:22px 0 16px;
+  text-align:left;
+  font-weight:700;
+  font-size:40px;
+  line-height:49px;
+}
+
+/* Pila de botones */
+.pile{ display:flex; flex-direction:column; gap:18px; margin-top:10px; }
+
+/* Botón pastilla blanco (texto rojo) */
+.btn-pill{
+  width:100%;
+  min-height:64px;
+  padding:14px 20px;
+  background:#FFFFFF;
+  color:#BD171D;
+  border:none;
+  border-radius:25px;
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:0;
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  cursor:pointer;
+}
+
+/* Contador circular a la izquierda */
+.btn-with-badge{ position:relative; }
+.badge-circle{
+  display:inline-grid; place-items:center;
+  width:34px; height:34px; border-radius:999px;
+  background:#BD171D; color:#fff; font-weight:800; font-size:18px;
+  border:2px solid #FFFFFF; /* aro blanco como en XD */
+}
+
+/* Botón “Registrar” contorno blanco (texto blanco) */
+.btn-outline{
+  width:100%;
+  min-height:64px;
+  padding:14px 20px;
+  background:transparent;
+  color:#FFFFFF;
+  border:3px solid #FFFFFF;
+  border-radius:25px;
+  font-size:32px;
+  font-weight:800;
+  cursor:pointer;
+}
+.btn-outline:hover{ filter:brightness(1.03); }
