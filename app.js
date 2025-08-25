@@ -47,12 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!punto) return toast("Selecciona un punto de venta");
     if (pin !== punto.pin) return toast("PIN incorrecto");
 
-    // ✅ Acceso concedido: aquí navegas al siguiente frame/ruta
-    // Si tu app es SPA, cambia 'window.location' por tu función go('home')
-    // go('home');
-    toast("Acceso concedido");
-    // Ejemplo: redirigir a tu app principal
-    // window.location.href = "./index.html#home";
+    // ✅ Acceso concedido: ir al frame 2 (venta-home)
+showFrame("venta-home");        // <- navega al segundo frame
+if (typeof updateVentaCounters === "function") {
+  updateVentaCounters();        // <- inicializa contadores en 0
+}
+// Si no quieres mostrar el toast, quítalo:
+ // toast("Acceso concedido");
   });
 
   // Init estado del botón
